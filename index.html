@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title>卡牌消除游戏</title>
+<link href="style/main.css" rel="stylesheet">
+</head>
+<body>
+
+<script type="text/javascript" src="js/game.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
+
+<section id="game">
+    <div id="cards">
+        <div class="card">
+            <div class="face front"></div>
+            <div class="face back"></div>
+        </div>
+    </div>
+</section>
+	
+<script type="text/javascript">
+$(function(){	
+	neusoft.matchingGame.deck.sort(shuffle);	
+	var $card=$(".card");
+	for(var i= 0;i<11;i++)
+	{
+		$card.clone().appendTo($("#cards"));
+	}	
+	$(".card").each(function(index)
+	{
+		$(this).css({
+			"left":(neusoft.matchingGame.cardWidth+20)*(index%4)+"px",
+			"top":(neusoft.matchingGame.cardHeight+20)*Math.floor(index/4)+"px"
+		});
+		var pattern=neusoft.matchingGame.deck.pop();
+		$(this).data("pattern",pattern);
+		$(this).find(".back").addClass(pattern);
+		$(this).click(selectCard);
+	});
+});
+</script>
+<div style="text-align:center;">
+<p>制作:<a href="" target="_blank">143寝室-卡牌消除游戏</a></p>
+</div>
+</body>
+</html>
